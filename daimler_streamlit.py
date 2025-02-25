@@ -54,11 +54,7 @@ def process_file(factuur_file):
     new_row['Kostenplaats: Omschrijving'] = ''
     import_df = pd.concat([pd.DataFrame([new_row]), import_df], ignore_index=True)
     
-    output = BytesIO()
-    import_df.to_excel(output, index=False)
-    output.seek(0)
-    
-    return output
+    return import_df
 
 
 def main():
@@ -69,14 +65,17 @@ def main():
     
     if factuur_file:
 
-        if st.button('Verwerk en Download Bestand'):
+        processed_file = process_file(factuur_file)
+        st.write('Verwerkte factuur', processed_file.head())
+                
+        output = BytesIO()
+        processed_file.to_excel(output, index=False)
+        output.seek(0)
 
-            processed_file = process_file(factuur_file)
-            st.write('Verwerkte factuur', processed_file)
-            st.download_button(label='Download verwerkte factuur',
-                               data=processed_file,
-                               file_name='verwerkte_factuur.xlsx',
-                               mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        st.download_button(label='Download verwerkte factuur',
+                            data=output,
+                            file_name='verwerkte_factuur.xlsx',
+                            mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
 
 if __name__ == '__main__':
     main()
