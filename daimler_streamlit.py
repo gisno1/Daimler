@@ -70,12 +70,15 @@ def main():
                 
         output = BytesIO()
         processed_file.to_excel(output, index=False)
+
         output.seek(0)
 
         st.download_button(label='Download verwerkte factuur',
                             data=output,
-                            file_name='verwerkte_factuur.xlsx',
+                            file_name='ImportDaimlerFactuur.xlsx',
                             mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        
+        st.markdown("<p style='font-size:12px; color:gray;'>Let op, sla het bestand hierna op als Excel 97-2003, zodat je het kan importeren in Exact.</p>", unsafe_allow_html=True)
 
 if __name__ == '__main__':
     main()
