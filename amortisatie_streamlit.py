@@ -16,7 +16,7 @@ def process_pdf(file):
         for line in lines:
             if 'AFSCHRIJVINGSTABEL DOSSIER' in line:
                 Boekstuknummer = line.split()[-1]
-            if 'Start overeenkomst' in line:
+            if 'Start overeenkomst' in line or 'Start contract' in line:
                 Factuurdatum = line.split()[-1]
                 Factuurdatum = pd.to_datetime(Factuurdatum, dayfirst=True, errors='coerce')
                 Boekjaar = pd.to_datetime(Factuurdatum, dayfirst=True).year
