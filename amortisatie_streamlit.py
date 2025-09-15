@@ -128,11 +128,12 @@ def main():
         df.to_excel(output, index=False)
         output.seek(0)
 
-        st.download_button(label='Download het Excel bestand', data=output, file_name=f'{kenteken} 1.xlsx', mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        st.download_button(label='Download het Excel bestand', data=output, file_name=f'{kenteken} 2.xlsx', mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
         
         st.markdown("<p style='font-size:12px; color:gray;'>Let op, sla het bestand hierna op als Excel 97-2003, zodat je het kan importeren in Exact.</p>", unsafe_allow_html=True)
 
 if __name__ == '__main__':
     main()
+
 
 
